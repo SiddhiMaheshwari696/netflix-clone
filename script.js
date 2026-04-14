@@ -49,7 +49,7 @@ document.querySelectorAll(".movie").forEach(movie => {
 
 });
 
-const apiKey = "d318969";
+const apiKey = "bb960dfa";
 
 // GET MOVIES
 async function getMovies(search) {

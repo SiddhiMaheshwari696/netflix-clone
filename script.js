@@ -48,3 +48,63 @@ document.querySelectorAll(".movie").forEach(movie => {
     });
 
 });
+
+const apiKey = "d318969";
+
+// GET MOVIES
+async function getMovies(search) {
+  if (!search) return;
+
+  const res = await fetch(
+    `https://www.omdbapi.com/?apikey=${apiKey}&s=${search}`
+  );
+
+  const data = await res.json();
+
+  if (data.Response === "False") {
+    document.querySelector(".row").innerHTML = "<p>No movies found</p>";
+    return;
+  }
+
+  displayMovies(data.Search);
+}
+
+// DISPLAY MOVIES
+function displayMovies(movies) {
+  const row = document.querySelector(".row");
+  row.innerHTML = "";
+
+  movies.forEach(movie => {
+    const div = document.createElement("div");
+    div.classList.add("movie");
+
+    const poster =
+      movie.Poster !== "N/A"
+        ? movie.Poster
+        : "https://via.placeholder.com/200x300?text=No+Image";
+
+    div.innerHTML = `
+      <img src="${poster}" alt="${movie.Title}">
+      <div class="info">
+        <h3>${movie.Title}</h3>
+      </div>
+    `;
+
+    row.appendChild(div);
+  });
+}
+
+// SEARCH BAR
+const input = document.querySelector("input");
+
+let timeout;
+input.addEventListener("input", (e) => {
+  clearTimeout(timeout);
+
+  timeout = setTimeout(() => {
+    getMovies(e.target.value);
+  }, 500);
+});
+
+// DEFAULT LOAD
+getMovies("avengers");

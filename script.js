@@ -105,6 +105,3 @@ input.addEventListener("input", (e) => {
     getMovies(e.target.value);
   }, 500);
 });
-
-// DEFAULT LOAD
-getMovies("avengers");

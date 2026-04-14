@@ -105,3 +105,8 @@ input.addEventListener("input", (e) => {
     getMovies(e.target.value);
   }, 500);
 });
+
+loadRow("avengers", ".row1");   // Action
+loadRow("batman", ".row2");     // Blockbusters
+loadRow("kabir singh", ".row3"); // Bollywood
+loadRow("breaking bad", ".row4"); // Series
